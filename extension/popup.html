@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboGrab Hub</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+      <span class="brand-name">TurboGrab</span>
+      <span class="version-tag">v1.0</span>
+    </div>
+    <div id="connectionStatus" class="status-pill offline">
+      <span class="status-dot"></span>
+      <span id="statusText">Desktop Offline</span>
+    </div>
+  </div>
+
+  <div class="control-row">
+    <span class="control-label">Automatic Interception</span>
+    <label class="switch">
+      <input type="checkbox" id="autoInterceptToggle" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="section-title">Manual Acceleration</div>
+  <div class="input-group">
+    <input type="url" id="manualUrl" placeholder="Paste direct download or YouTube/stream link..." />
+    <select id="manualQuality" class="quality-select" title="Target Video Quality">
+      <option value="2160p">4K Ultra HD (2160p)</option>
+      <option value="1440p">2K Quad HD (1440p)</option>
+      <option value="1080p" selected>1080p Full HD</option>
+      <option value="720p">720p HD</option>
+      <option value="480p">480p SD</option>
+      <option value="360p">360p Mobile</option>
+      <option value="audio">Audio Track (MP3)</option>
+    </select>
+    <button id="sendManualBtn" class="btn-primary">Grab</button>
+  </div>
+
+  <div class="section-title-row">
+    <span class="section-title">Sniffed Tab Streams</span>
+    <span id="streamCount" class="badge">0</span>
+  </div>
+
+  <div id="streamsList" class="streams-list">
+    <div class="empty-state">No media streams detected on active tab.</div>
+  </div>
+
+  <div class="footer">
+    <button id="reconnectBtn" class="btn-link">Reconnect Desktop Host</button>
+    <span class="ws-info">Port: 48123</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

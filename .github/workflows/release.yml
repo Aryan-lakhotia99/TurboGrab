@@ -1,0 +1,77 @@
+name: 'Release TurboGrab Suite'
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'windows-latest'
+            target: 'x86_64-pc-windows-msvc'
+            args: ''
+            artifact_name: 'turbograb_x64.msi'
+          - platform: 'macos-latest'
+            target: 'aarch64-apple-darwin'
+            args: '--target aarch64-apple-darwin'
+            artifact_name: 'turbograb_aarch64.dmg'
+          - platform: 'ubuntu-22.04'
+            target: 'x86_64-unknown-linux-gnu'
+            args: ''
+            artifact_name: 'turbograb_amd64.AppImage'
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Rust Stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux Dependencies (Ubuntu)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Build Tauri Application
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'TurboGrab ${{ github.ref_name }}'
+          releaseBody: |
+            ### TurboGrab Release ${{ github.ref_name }}
+            High-Performance Cross-Platform Download Accelerator matching IDM transfer speed.
+            
+            #### Direct Public Downloads:
+            - **Windows x64 (.msi)**: [turbograb_x64.msi](https://github.com/${{ github.repository }}/releases/latest/download/turbograb_x64.msi)
+            - **macOS Apple Silicon (.dmg)**: [turbograb_aarch64.dmg](https://github.com/${{ github.repository }}/releases/latest/download/turbograb_aarch64.dmg)
+            - **Linux x64 (.AppImage)**: [turbograb_amd64.AppImage](https://github.com/${{ github.repository }}/releases/latest/download/turbograb_amd64.AppImage)
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}

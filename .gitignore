@@ -1,0 +1,95 @@
+# ==========================================
+# TurboGrab Repository .gitignore
+# ==========================================
+
+# Dedicated Non-Uploaded Folder (Excluded from GitHub)
+Do-Not-Upload-To-GitHub/
+Local-Backup/
+non-uploaded-files/
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production / compiler build outputs
+dist/
+dist-electron/
+dist-ssr/
+release/
+release-builds/
+build/
+out/
+src-tauri/target/
+**/target/
+
+# Local video renders, photos, and media scratchpads
+brag-output/
+turbograb-photos/
+*.mp4
+*.webm
+*.avi
+*.mov
+
+# Executable binaries and archives (General)
+*.exe
+*.EXE
+*.exb
+*.EXB
+*.msi
+*.dmg
+*.AppImage
+
+# Whitelist Downloads/ folder for Git LFS distribution
+!Downloads/
+!Downloads/**
+
+# User database and local session files
+.turbograb/
+*.db
+*.db-journal
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Environment and sensitive credential files
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# Logs and debug output
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# AI Agent tooling caches
+.agents/
+skills-lock.json
+
+# Internal prompt specifications
+*.pdf
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# IDE & Editor metadata
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

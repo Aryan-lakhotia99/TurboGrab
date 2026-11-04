@@ -1,0 +1,9 @@
+{
+  "name": "com.turbograb.host",
+  "description": "TurboGrab Native Messaging Host for Firefox",
+  "path": "turbograb_host.bat",
+  "type": "stdio",
+  "allowed_extensions": [
+    "turbograb-interceptor@turbograb.app"
+  ]
+}

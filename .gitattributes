@@ -1,0 +1,20 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Git Large File Storage (Git LFS) configuration
+*.EXB filter=lfs diff=lfs merge=lfs -text
+*.exb filter=lfs diff=lfs merge=lfs -text
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.EXE filter=lfs diff=lfs merge=lfs -text
+*.dmg filter=lfs diff=lfs merge=lfs -text
+*.AppImage filter=lfs diff=lfs merge=lfs -text
+*.msi filter=lfs diff=lfs merge=lfs -text
+
+# Downloads binaries
+Downloads/*.exe filter=lfs diff=lfs merge=lfs -text
+Downloads/*.zip filter=lfs diff=lfs merge=lfs -text
+Downloads/*.EXB filter=lfs diff=lfs merge=lfs -text
+Downloads/*.exb filter=lfs diff=lfs merge=lfs -text
+Downloads/*.dmg filter=lfs diff=lfs merge=lfs -text
+Downloads/*.AppImage filter=lfs diff=lfs merge=lfs -text
+Downloads/*.msi filter=lfs diff=lfs merge=lfs -text
