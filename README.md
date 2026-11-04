@@ -2,7 +2,7 @@
 
 > **Next-Generation Desktop Download Manager**  
 > Pure Node.js • Electron • React 18 • TypeScript • Tailwind CSS • WebExtension MV3 • Git LFS  
-> *(100% Python-Free)*
+
 
 ---
 
@@ -106,7 +106,7 @@ TurboGrab/
 ├── .gitignore                               # Production repository exclusions
 └── README.md                                # Project documentation
 
-(Note: Do-Not-Upload-To-GitHub/ and node_modules/ are excluded via .gitignore)
+
 ```
 
 ---
