@@ -29,11 +29,11 @@
 
 ## 📸 User Interface Showcase
 
-| Main Dashboard & Transfer Queue | Active 16-Thread Stream Telemetry |
+| Mission Control Dashboard | Interactive Destination Selector |
 |:---:|:---:|
-| ![Main Dashboard](assets/screenshots/01-dashboard.png) | ![Active Transfer Detail](assets/screenshots/02-active-transfer-detail.png) |
-| **Interactive Destination Prompt** | **Browser Integration & Sniffer Bridge** |
-| ![Destination Prompt](assets/screenshots/03-download-destination-prompt.png) | ![Browser Integration](assets/screenshots/04-browser-integration.png) |
+| ![Mission Control Dashboard](assets/screenshots/01-dashboard.png) | ![Interactive Destination Selector](assets/screenshots/02-destination-prompt.png) |
+| **Multi-Browser Integration Hub** | **Analytics & Historical Telemetry** |
+| ![Multi-Browser Integration Hub](assets/screenshots/03-browser-integration.png) | ![Analytics & Telemetry](assets/screenshots/04-analytics.png) |
 
 ---
 
