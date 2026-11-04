@@ -1,7 +1,7 @@
 # TurboGrab • High-Performance Download Accelerator & Manager
 
 > **Next-Generation Desktop Download Manager**  
-> Pure Node.js • Electron • React 18 • TypeScript • Tailwind CSS • WebExtension MV3 • Git LFS  
+> Pure Node.js • Electron • React 18 • TypeScript • Tailwind CSS • WebExtension MV3 • Git LFS.  
 
 
 ---
