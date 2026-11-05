@@ -45,9 +45,4 @@ A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA
 ---
 
 ## 🌐 Cross-Platform Binaries (macOS & Linux)
-TurboGrab's automated release pipeline (`.github/workflows/release.yml`) builds:
-- **macOS Apple Silicon**: `turbograb_aarch64.dmg`
-- **Linux 64-bit**: `turbograb_amd64.AppImage`
-- **Windows MSI**: `turbograb_x64.msi`
-
-You can download all platform binaries from the [Releases Tab](../../releases).
+Additional platform packages (macOS `.dmg` and Linux `.AppImage`) can be built directly from source or downloaded from the [Releases Tab](../../releases).
