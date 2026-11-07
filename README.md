@@ -107,16 +107,6 @@ A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA
 ```text
 TurboGrab/
 │
-├── Documentation/                           # Technical Architecture & Guides
-│   ├── ARCHITECTURE.md                      # System architecture & data flow
-│   ├── DOWNLOAD_ENGINE.md                   # 16-thread range engine & work-stealing
-│   ├── BROWSER_INTEGRATION.md               # WebSocket bridge & Chrome extension
-│   ├── API.md                               # IPC channel contract specification
-│   ├── SECURITY.md                          # Security model & vulnerability handling
-│   ├── INSTALLATION_GUIDE.md                # Development & build setup instructions
-│   ├── CHANGELOG.md                         # Release history & version milestones
-│   └── PRIVACY_POLICY.md                    # Zero-telemetry local privacy policy
-│
 ├── Downloads/                               # Git LFS Release Binaries
 │   ├── TurboGrab Setup 1.0.0.exe            # Windows Installer (125.88 MB via Git LFS)
 │   ├── TurboGrab-v1.0.0-Windows-x64.zip     # Portable Multiplatform Archive
