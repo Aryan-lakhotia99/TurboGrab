@@ -33,7 +33,7 @@ timeout /t 2 /nobreak >nul
 
 if defined CHROME_EXE (
     echo Launching Chrome with TurboGrab extension directly integrated...
-    start "" "%CHROME_EXE%" --load-extension="%EXT_DIR%" "https://www.youtube.com"
+    start "" "%CHROME_EXE%" --load-extension="%EXT_DIR%" "chrome://extensions"
     echo.
     echo ======================================================================
     echo   SUCCESS: TurboGrab Desktop + Chrome Extension are now ACTIVE!
