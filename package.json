@@ -30,6 +30,9 @@
       "package.json"
     ],
     "asar": true,
+    "asarUnpack": [
+      "extension/**/*"
+    ],
     "win": {
       "target": [
         {

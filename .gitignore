@@ -93,3 +93,6 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Marketing and local launch assets
+linkedin-campaign/

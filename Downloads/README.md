@@ -8,7 +8,9 @@ This directory contains the release distribution binaries for TurboGrab, tracked
 
 | Operating System | Package | Size | SHA-256 Checksum | Tracking |
 |---|---|---|---|---|
-| **Windows 10 / 11** | [`TurboGrab Setup 1.0.0.exe`](./TurboGrab%20Setup%201.0.0.exe) | 125.88 MB | `A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA` | Git LFS |
+| **Windows 10 / 11** | [`TurboGrab Setup 1.0.0.exe`](./TurboGrab%20Setup%201.0.0.exe) | 125.88 MB | `47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C` | Git LFS |
+| **Browser Extension (Zip)** | [`TurboGrab-Browser-Extension-v1.0.0.zip`](./TurboGrab-Browser-Extension-v1.0.0.zip) | 21 KB | `D1DF9BFB28FAE3454DC36AE2B6AA7C75FC6006B919822FABAFBA136D64865D68` | Direct Download |
+| **Browser Extension (Unpacked)** | [`extension/`](./extension) | Directory | Ready to Load | Direct Repository |
 | **Cross-Platform Portable** | [`TurboGrab-v1.0.0-Windows-x64.zip`](./TurboGrab-v1.0.0-Windows-x64.zip) | 126 KB | Dynamic Build | Git LFS |
 | **macOS (Apple Silicon)** | `turbograb_aarch64.dmg` | Auto-built | Automated CI/CD | [GitHub Releases](../../releases) |
 | **Linux (Universal)** | `turbograb_amd64.AppImage` | Auto-built | Automated CI/CD | [GitHub Releases](../../releases) |
@@ -39,7 +41,7 @@ Get-FileHash -Path "TurboGrab Setup 1.0.0.exe" -Algorithm SHA256
 ```
 Expected Hash:
 ```
-A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA
+47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C
 ```
 
 ---

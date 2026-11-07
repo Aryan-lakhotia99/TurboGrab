@@ -304,7 +304,13 @@ app.whenReady().then(() => {
     const target = browsers.find(b => b.id === browserId && b.isInstalled);
     if (!target || !target.executablePath) return false;
 
-    const extPath = path.join(__dirname, '..', 'extension');
+    let extPath = path.join(__dirname, '..', 'extension');
+    if (app.isPackaged) {
+      const unpacked = path.join(process.resourcesPath, 'app.asar.unpacked', 'extension');
+      if (fs.existsSync(unpacked)) {
+        extPath = unpacked;
+      }
+    }
     const { spawn } = require('child_process');
 
     // 1. Open the extension folder in File Explorer so the user can easily select or drag it
@@ -332,6 +338,54 @@ app.whenReady().then(() => {
       shell.openExternal(target.storeUrl);
       return false;
     }
+  });
+
+  ipcMain.handle('open-extension-folder', async () => {
+    let extPath = path.join(__dirname, '..', 'extension');
+    if (app.isPackaged) {
+      const unpacked = path.join(process.resourcesPath, 'app.asar.unpacked', 'extension');
+      if (fs.existsSync(unpacked)) {
+        extPath = unpacked;
+      }
+    }
+    try {
+      await shell.openPath(extPath);
+      return { success: true, path: extPath };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  });
+
+  ipcMain.handle('export-extension-to-downloads', async () => {
+    let srcExt = path.join(__dirname, '..', 'extension');
+    if (app.isPackaged) {
+      const unpacked = path.join(process.resourcesPath, 'app.asar.unpacked', 'extension');
+      if (fs.existsSync(unpacked)) {
+        srcExt = unpacked;
+      }
+    }
+    const destDir = path.join(app.getPath('downloads'), 'TurboGrab-Extension');
+    try {
+      if (!fs.existsSync(destDir)) {
+        fs.mkdirSync(destDir, { recursive: true });
+      }
+      fs.cpSync(srcExt, destDir, { recursive: true });
+      await shell.openPath(destDir);
+      return { success: true, path: destDir };
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  });
+
+  ipcMain.handle('get-extension-path', () => {
+    let extPath = path.join(__dirname, '..', 'extension');
+    if (app.isPackaged) {
+      const unpacked = path.join(process.resourcesPath, 'app.asar.unpacked', 'extension');
+      if (fs.existsSync(unpacked)) {
+        extPath = unpacked;
+      }
+    }
+    return extPath;
   });
 
   // 3. Create native desktop window

@@ -57,4 +57,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   checkForUpdates: () => ipcRenderer.invoke('check-for-updates'),
   openExternalUrl: (url) => ipcRenderer.invoke('open-external-url', url),
   launchBrowserExtension: (browserId) => ipcRenderer.invoke('launch-browser-extension', browserId),
+  openExtensionFolder: () => ipcRenderer.invoke('open-extension-folder'),
+  exportExtensionToDownloads: () => ipcRenderer.invoke('export-extension-to-downloads'),
+  getExtensionPath: () => ipcRenderer.invoke('get-extension-path'),
 });

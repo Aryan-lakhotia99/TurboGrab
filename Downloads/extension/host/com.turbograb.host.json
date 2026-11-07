@@ -1,0 +1,10 @@
+{
+  "name": "com.turbograb.host",
+  "description": "TurboGrab Native Messaging Host for Chrome & Edge",
+  "path": "turbograb_host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://*/",
+    "chrome-extension://turbograb-interceptor@turbograb.app/"
+  ]
+}

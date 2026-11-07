@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "TurboGrab Interceptor & Media Sniffer",
+  "version": "1.0.0",
+  "description": "High-Performance Browser Interceptor & Media Sniffer for TurboGrab Desktop Accelerator",
+  "permissions": [
+    "downloads",
+    "webRequest",
+    "declarativeNetRequest",
+    "cookies",
+    "storage",
+    "activeTab",
+    "nativeMessaging",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "turbograb-interceptor@turbograb.app",
+      "strict_min_version": "109.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

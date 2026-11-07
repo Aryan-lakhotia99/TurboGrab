@@ -12,7 +12,10 @@ import {
   Terminal,
   Layers,
   Sparkles,
-  Compass
+  Compass,
+  FolderOpen,
+  Download,
+  Check
 } from 'lucide-react';
 
 interface BrowserIntegrationViewProps {
@@ -25,12 +28,17 @@ export const BrowserIntegrationView: React.FC<BrowserIntegrationViewProps> = ({ 
   const [isLoading, setIsLoading] = useState(false);
   const [registerStatus, setRegisterStatus] = useState<string | null>(null);
   const [activeMessage, setActiveMessage] = useState<string | null>(null);
+  const [extensionPath, setExtensionPath] = useState<string>('');
 
   const fetchBrowsers = async () => {
     setIsLoading(true);
     try {
-      const detected = await api.detectBrowsers();
+      const [detected, extP] = await Promise.all([
+        api.detectBrowsers(),
+        api.getExtensionPath()
+      ]);
       setBrowsers(detected);
+      setExtensionPath(extP);
     } catch (err: any) {
       console.error('Error detecting browsers:', err);
     } finally {
@@ -41,6 +49,27 @@ export const BrowserIntegrationView: React.FC<BrowserIntegrationViewProps> = ({ 
   useEffect(() => {
     fetchBrowsers();
   }, []);
+
+  const handleOpenExtensionFolder = async () => {
+    try {
+      const res = await api.openExtensionFolder();
+      if (res && res.path) {
+        setActiveMessage(`Opened extension folder: ${res.path}`);
+      }
+    } catch (_) {}
+    setTimeout(() => setActiveMessage(null), 4000);
+  };
+
+  const handleExportToDownloads = async () => {
+    setActiveMessage('Exporting extension to your Downloads folder...');
+    try {
+      const res = await api.exportExtensionToDownloads();
+      if (res && res.success) {
+        setActiveMessage(`Extension exported to: ${res.path || 'Downloads/TurboGrab-Extension'}`);
+      }
+    } catch (_) {}
+    setTimeout(() => setActiveMessage(null), 4000);
+  };
 
   const handleRegisterNativeHost = async () => {
     setRegisterStatus('Registering Windows Registry Native Host keys...');
@@ -276,25 +305,50 @@ export const BrowserIntegrationView: React.FC<BrowserIntegrationViewProps> = ({ 
       <div className={`p-5 rounded-xl border ${
         isDark ? 'bg-gray-900/60 border-gray-800' : 'bg-white border-gray-200 shadow-sm'
       }`}>
-        <h3 className="font-bold text-sm mb-2 flex items-center gap-2">
-          <Terminal size={15} className="text-indigo-500" />
-          Extension Folder & Direct Integration
-        </h3>
-        <p className={`text-xs mb-3 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-          The browser extension is ready in the project directory. You can load it unpacked directly in any Chromium or Firefox browser:
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+          <div>
+            <h3 className="font-bold text-sm flex items-center gap-2">
+              <Terminal size={15} className="text-indigo-500" />
+              Extension Folder & Direct Integration
+            </h3>
+            <p className={`text-xs mt-0.5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              Load the extension directly into Chrome, Edge, Brave, or Opera via Developer Mode:
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleOpenExtensionFolder}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                isDark ? 'border-gray-700 bg-gray-900 hover:bg-gray-800 text-gray-200' : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
+              }`}
+              title="Open the extension directory in Windows File Explorer"
+            >
+              <FolderOpen size={14} className="text-indigo-500" />
+              Open Folder
+            </button>
+            <button
+              onClick={handleExportToDownloads}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all"
+              title="Export a ready-to-load copy of the extension into your Downloads folder"
+            >
+              <Download size={14} />
+              Export to Downloads
+            </button>
+          </div>
+        </div>
 
         <div className={`p-3 rounded-lg font-mono text-xs mb-3 select-all ${
           isDark ? 'bg-gray-950 border border-gray-800 text-indigo-400' : 'bg-gray-50 border border-gray-200 text-indigo-600'
         }`}>
-          {typeof window !== 'undefined' ? `${window.location.origin}/extension` : 'C:\\Users\\Aryan\\Desktop\\projectttt\\extension'}
+          {extensionPath || (typeof window !== 'undefined' ? `${window.location.origin}/extension` : 'Downloads\\TurboGrab-Extension')}
         </div>
 
         <ol className={`list-decimal list-inside text-xs space-y-1.5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-          <li>Open your browser and navigate to <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">chrome://extensions</code> or <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">edge://extensions</code></li>
-          <li>Enable <strong>Developer mode</strong> (toggle switch in the top right corner)</li>
-          <li>Click <strong>Load unpacked</strong> and select the <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">extension</code> folder</li>
-          <li>The <strong>TurboGrab Grab-Chip</strong> and toolbar icon will immediately activate and connect to port 48123</li>
+          <li>Click <strong>Export to Downloads</strong> or <strong>Open Folder</strong> above.</li>
+          <li>In your browser, go to <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">chrome://extensions</code> or <code className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">edge://extensions</code></li>
+          <li>Turn on <strong>Developer mode</strong> (switch in top right corner)</li>
+          <li>Click <strong>Load unpacked</strong> and select the extension folder</li>
+          <li>The <strong>TurboGrab Grab-Chip</strong> and toolbar icon will immediately activate and connect!</li>
         </ol>
       </div>
     </div>

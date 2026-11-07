@@ -58,7 +58,9 @@ Official distribution packages are tracked directly in this repository under [`D
 
 | Operating System | Package | Size | SHA-256 Checksum | Direct Link |
 |---|---|---|---|---|
-| **Windows 10 / 11** | `TurboGrab Setup 1.0.0.exe` | 125.88 MB | `A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA` | [Download Installer](./Downloads/TurboGrab%20Setup%201.0.0.exe) |
+| **Windows 10 / 11** | `TurboGrab Setup 1.0.0.exe` | 125.88 MB | `47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C` | [Download Installer](./Downloads/TurboGrab%20Setup%201.0.0.exe) |
+| **Browser Extension (Zip)** | `TurboGrab-Browser-Extension-v1.0.0.zip` | 21 KB | `D1DF9BFB28FAE3454DC36AE2B6AA7C75FC6006B919822FABAFBA136D64865D68` | [Download Extension ZIP](./Downloads/TurboGrab-Browser-Extension-v1.0.0.zip) |
+| **Browser Extension (Folder)** | `extension/` | Directory | Ready to Load | [Open Extension Folder](./Downloads/extension) |
 | **Cross-Platform Portable** | `TurboGrab-v1.0.0-Windows-x64.zip` | 126 KB | Dynamic Build | [Download ZIP](./Downloads/TurboGrab-v1.0.0-Windows-x64.zip) |
 | **macOS (Apple Silicon)** | `turbograb_aarch64.dmg` | Auto-built | CI/CD Artifact | [Releases](../../releases) |
 | **Linux (Universal)** | `turbograb_amd64.AppImage` | Auto-built | CI/CD Artifact | [Releases](../../releases) |
@@ -74,7 +76,7 @@ Get-FileHash -Algorithm SHA256 "TurboGrab Setup 1.0.0.exe"
 ```
 Expected Hash:
 ```text
-A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA
+47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C
 ```
 
 ---
@@ -107,8 +109,10 @@ A6660A4C8DA45C733B3789E686F368AB52E11524B9F80FE3432A4EFC8B76A9AA
 ```text
 TurboGrab/
 │
-├── Downloads/                               # Git LFS Release Binaries
+├── Downloads/                               # Git LFS Release Binaries & Extension
 │   ├── TurboGrab Setup 1.0.0.exe            # Windows Installer (125.88 MB via Git LFS)
+│   ├── TurboGrab-Browser-Extension-v1.0.0.zip # Standalone Browser Extension (21 KB)
+│   ├── extension/                           # Ready-to-load Unpacked Extension Folder
 │   ├── TurboGrab-v1.0.0-Windows-x64.zip     # Portable Multiplatform Archive
 │   └── README.md                            # Download instructions & SHA-256 hashes
 │

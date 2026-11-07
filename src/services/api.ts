@@ -439,6 +439,30 @@ export const api = {
     return true;
   },
 
+  async openExtensionFolder(): Promise<{ success: boolean; path?: string }> {
+    const electron = getElectronAPI();
+    if (electron && electron.openExtensionFolder) {
+      return await electron.openExtensionFolder();
+    }
+    return { success: true, path: 'extension' };
+  },
+
+  async exportExtensionToDownloads(): Promise<{ success: boolean; path?: string }> {
+    const electron = getElectronAPI();
+    if (electron && electron.exportExtensionToDownloads) {
+      return await electron.exportExtensionToDownloads();
+    }
+    return { success: true, path: 'Downloads/TurboGrab-Extension' };
+  },
+
+  async getExtensionPath(): Promise<string> {
+    const electron = getElectronAPI();
+    if (electron && electron.getExtensionPath) {
+      return await electron.getExtensionPath();
+    }
+    return 'C:\\Users\\Aryan\\Desktop\\projectttt\\extension';
+  },
+
   async selectDirectory(defaultPath?: string): Promise<string | null> {
     const electron = getElectronAPI();
     if (electron && electron.selectDirectory) {
