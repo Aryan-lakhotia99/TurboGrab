@@ -93,3 +93,7 @@ console.log('  ✓ turbograb_host.bat syntax and Node execution target verified'
 console.log('\n====================================================');
 console.log('   ALL CROSS-PLATFORM TESTS PASSED SUCCESSFULLY!    ');
 console.log('====================================================\n');
+
+// Cleanly stop the DownloadManager background timers so the process exits.
+downloadManager.dispose();
+process.exit(0);

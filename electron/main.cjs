@@ -40,7 +40,10 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.cjs'),
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: false
+      // SECURITY: full renderer sandbox. The preload script only uses
+      // contextBridge + ipcRenderer, both of which are available in sandboxed
+      // preloads, so no functionality is lost.
+      sandbox: true
     }
   });
 

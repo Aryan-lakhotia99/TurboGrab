@@ -16,7 +16,9 @@ export default defineConfig({
   envPrefix: ['VITE_', 'TAURI_ENV_*'],
   build: {
     target: process.env.TAURI_ENV_PLATFORM == 'windows' ? 'chrome105' : 'safari13',
-    minify: !process.env.TAURI_ENV_DEBUG ? 'esbuild' : false,
+    // Vite 8 (rolldown) pipeline: 'oxc' is the native minifier.
+    // 'esbuild' is deprecated in Vite 8 and requires the esbuild package separately.
+    minify: !process.env.TAURI_ENV_DEBUG ? 'oxc' : false,
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
   }
 })

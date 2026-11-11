@@ -13,12 +13,17 @@ function setInterceptHandler(fn) {
 }
 
 function isAllowedOrigin(origin) {
-  if (!origin) return true; // Direct extension sockets or native messaging
+  if (!origin) return true; // Direct extension sockets or native messaging (non-browser clients cannot be restricted via Origin)
   const lower = origin.toLowerCase();
+  // SECURITY: Only browser-extension schemes and our native host are allowed.
+  // Local web pages (http://localhost:*, http://127.0.0.1:*) and arbitrary
+  // websites are REJECTED so they cannot drive downloads on the user's machine.
+  // NOTE: until the extension is published to the Web Store / AMO we cannot pin
+  // exact extension IDs; any installed extension may currently connect.
+  // TODO(post-store-publish): replace scheme-prefix matching with pinned IDs:
+  //   chrome-extension://<published-id>, moz-extension://<published-uuid>
   return lower.startsWith('chrome-extension://') ||
          lower.startsWith('moz-extension://') ||
-         lower.includes('127.0.0.1') ||
-         lower.includes('localhost') ||
          lower === 'turbograb-native-host';
 }
 
@@ -135,9 +140,15 @@ function initWsServer() {
       return;
     }
 
-    res.setHeader('Access-Control-Allow-Origin', origin || '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Origin, Authorization');
+    // SECURITY: Only reflect CORS headers for validated browser-extension origins.
+    // Never echo '*' or arbitrary origins — this prevents regular websites and
+    // local web apps from reading responses or issuing cross-origin POSTs.
+    if (origin && isAllowedOrigin(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Origin, Authorization');
+      res.setHeader('Vary', 'Origin');
+    }
 
     if (req.method === 'OPTIONS') {
       res.writeHead(204);

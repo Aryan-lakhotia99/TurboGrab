@@ -1,181 +1,261 @@
-# TurboGrab • High-Performance Download Accelerator & Manager
+<div align="center">
 
-<p align="center">
-  <img src="public/logo.svg" alt="TurboGrab Logo" width="100" height="100" />
-</p>
+<img src="public/logo.svg" alt="TurboGrab Logo" width="110" height="110" />
 
-<p align="center">
-  <strong>The Next-Generation Desktop Download Accelerator & Workstation</strong><br>
-  Pure Node.js • Electron • React 18 Genesis UI • TypeScript • WebExtension MV3 • Git LFS<br>
-  <em>(Zero Telemetry • Open Source • Privacy-First)</em>
-</p>
+# TurboGrab
 
-<p align="center">
-  <a href="https://github.com/Aryan-lakhotia99/TurboGrab/releases"><img src="https://img.shields.io/badge/release-v1.0.0-blue.svg?style=flat-square" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="License"></a>
-  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/Node.js-v20%2B-339933.svg?style=flat-square" alt="Node.js">
-  <img src="https://img.shields.io/badge/UI-React%2018%20%2B%20Tailwind-61DAFB.svg?style=flat-square" alt="Frontend">
-  <img src="https://img.shields.io/badge/Git%20LFS-Enabled-orange.svg?style=flat-square" alt="Git LFS">
-</p>
+**Open-source, privacy-first download accelerator & manager for Windows, macOS & Linux**
+
+Pure Node.js engine • Electron • React 18 + TypeScript • WebExtension (MV3)
+
+[![CI](https://github.com/Aryan-lakhotia99/TurboGrab/actions/workflows/ci.yml/badge.svg)](https://github.com/Aryan-lakhotia99/TurboGrab/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A522.5-339933.svg)](https://nodejs.org)
+[![Electron](https://img.shields.io/badge/Desktop-Electron-47848F.svg)](https://www.electronjs.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+*Zero telemetry • 100% local • MIT licensed*
+
+</div>
 
 ---
 
 ## ⚡ Overview
 
-**TurboGrab** is an open-source, high-speed desktop download accelerator engineered from the ground up for power users. It combines a 16-connection parallel HTTP Range streaming engine, dynamic chunk work-stealing, real-time segment telemetry, interactive destination folder prompts, and seamless Chromium/Firefox extension auto-interception.
+TurboGrab is a high-speed desktop download manager built for power users. It
+combines a multi-connection parallel HTTP Range engine with dynamic work
+stealing, byte-level resumption, an embedded SQLite database, and an optional
+Chromium/Firefox extension that intercepts browser downloads and hands them to
+the desktop engine over a loopback WebSocket bridge.
+
+Everything runs on your machine. No accounts, no analytics, no cloud.
 
 ---
 
-## 📸 User Interface Showcase
+## 📊 Feature Comparison
 
-| Mission Control Dashboard | Interactive Destination Selector |
-|:---:|:---:|
-| ![Mission Control Dashboard](assets/screenshots/01-dashboard.png) | ![Interactive Destination Selector](assets/screenshots/02-destination-prompt.png) |
-| **Multi-Browser Integration Hub** | **Analytics & Historical Telemetry** |
-| ![Multi-Browser Integration Hub](assets/screenshots/03-browser-integration.png) | ![Analytics & Telemetry](assets/screenshots/04-analytics.png) |
-
----
-
-## 📊 Feature Comparison Matrix
-
-| Feature | Standard Browser (Chrome/Edge) | Legacy Download Tools (e.g. IDM) | 🚀 TurboGrab |
+| Feature | Browser Download | Legacy Tools (IDM, etc.) | TurboGrab |
 |---|:---:|:---:|:---:|
-| **License & Cost** | Free (Closed Source) | Paid Shareware (~$25/yr) | **100% Free & Open Source (MIT)** |
-| **User Interface** | Minimal Tab Bar | 1990s Windows 98 Era | **Modern Dark Genesis UI (React 18)** |
-| **Parallel HTTP Range** | Single-stream (1x) | Multi-part | **16 Parallel Streams + Work-Stealing** |
-| **Dynamic Resumption** | Often fails on broken link | Yes | **`r+` Byte-level offset resumption** |
-| **Browser Extension** | Built-in | Proprietary binary bridge | **MV3 + Loopback WebSocket (`127.0.0.1`)** |
-| **Embedded Database** | Unindexed history | Proprietary format | **ACID SQLite WAL (`node:sqlite`)** |
-| **Telemetry & Tracking** | High telemetry | Closed-source telemetry | **Zero Telemetry / 100% Local Privacy** |
-| **Architecture** | Heavy multi-process tabs | Monolithic executable | **Modern Pure Node.js + Electron Stack** |
+| **License & cost** | Free (closed source) | Paid shareware | **Free & open source (MIT)** |
+| **Parallel HTTP Range** | Single stream | Multi-part | **Up to 16 parallel streams + work stealing** |
+| **Dynamic resumption** | Often fails | Yes | **`r+` byte-level offset resume w/ ETag validation** |
+| **Browser integration** | Built-in | Proprietary bridge | **MV3 extension + loopback WebSocket** |
+| **Embedded database** | Unindexed history | Proprietary format | **SQLite with WAL (`node:sqlite`)** |
+| **Telemetry** | High | Closed source | **None — 100% local** |
+| **Stack** | N/A | Monolithic binary | **Node.js + Electron + React** |
 
 ---
 
-## ⬇️ DOWNLOAD TURBOGRAB (Windows & Cross-Platform)
+## 🖥️ Platform Support
 
-Official distribution packages are tracked directly in this repository under [`Downloads/`](./Downloads/) via **Git Large File Storage (Git LFS)** and mirrored on **GitHub Releases**:
+| Platform | Status | Package |
+|---|---|---|
+| **Windows 10/11** (x64) | ✅ Released | NSIS installer (`.exe`) |
+| **macOS** (Apple Silicon & Intel) | 🚧 Packaging verified in CI, artifacts on the roadmap | `electron-builder --mac` |
+| **Linux** (x64) | 🚧 Packaging verified in CI, artifacts on the roadmap | AppImage / `.deb` / `.rpm` |
 
-| Operating System | Package | Size | SHA-256 Checksum | Direct Link |
-|---|---|---|---|---|
-| **Windows 10 / 11** | `TurboGrab Setup 1.0.0.exe` | 125.88 MB | `47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C` | [Download Installer](./Downloads/TurboGrab%20Setup%201.0.0.exe) |
-| **Browser Extension (Zip)** | `TurboGrab-Browser-Extension-v1.0.0.zip` | 21 KB | `D1DF9BFB28FAE3454DC36AE2B6AA7C75FC6006B919822FABAFBA136D64865D68` | [Download Extension ZIP](./Downloads/TurboGrab-Browser-Extension-v1.0.0.zip) |
-| **Browser Extension (Folder)** | `extension/` | Directory | Ready to Load | [Open Extension Folder](./Downloads/extension) |
-| **Cross-Platform Portable** | `TurboGrab-v1.0.0-Windows-x64.zip` | 126 KB | Dynamic Build | [Download ZIP](./Downloads/TurboGrab-v1.0.0-Windows-x64.zip) |
-| **macOS (Apple Silicon)** | `turbograb_aarch64.dmg` | Auto-built | CI/CD Artifact | [Releases](../../releases) |
-| **Linux (Universal)** | `turbograb_amd64.AppImage` | Auto-built | CI/CD Artifact | [Releases](../../releases) |
+> **Honesty note:** the v1.0.0 release currently ships a Windows installer only.
+> macOS `.dmg` and Linux AppImage builds are produced by the same
+> `electron-builder` configuration and will be published to GitHub Releases
+> (see the [Roadmap](#-roadmap)). We do not claim artifacts that don't exist.
 
-### How to Download
-1. **Direct Repository Download:** Click on [`TurboGrab Setup 1.0.0.exe`](./Downloads/TurboGrab%20Setup%201.0.0.exe) and click the **Download** button.
-2. **Git LFS Clone:** If cloning via Git, fetch the large installer with `git lfs pull`.
-3. **GitHub Releases:** Alternatively, download from the repository's **[Releases tab](../../releases)**.
+---
 
-#### Verifying File Integrity (PowerShell)
+## ⬇️ Downloads
+
+### Recommended: GitHub Releases
+
+Download the latest stable binaries from the
+**[Releases page](https://github.com/Aryan-lakhotia99/TurboGrab/releases)**.
+Release artifacts are checksummed automatically.
+
+### Current packages
+
+| Package | Size | SHA-256 |
+|---|---|---|
+| `TurboGrab Setup 1.0.0.exe` (Windows) | 125.88 MB | `47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C` |
+| `TurboGrab-Browser-Extension-v1.0.0.zip` | 21 KB | `D1DF9BFB28FAE3454DC36AE2B6AA7C75FC6006B919822FABAFBA136D64865D68` |
+
+These files are also mirrored in the [`Downloads/`](./Downloads) directory via
+Git LFS (see its [README](./Downloads/README.md)). GitHub Releases is the
+preferred channel — cloning the repository will not download LFS binaries
+unless you run `git lfs pull`.
+
+### Verifying integrity (PowerShell)
+
 ```powershell
 Get-FileHash -Algorithm SHA256 "TurboGrab Setup 1.0.0.exe"
 ```
-Expected Hash:
-```text
-47B582CF74CF207EBA23CBF986179DB1DA04E881B80B34C216CA510864E9A29C
-```
+
+> ⚠️ Binaries are currently **unsigned**. Windows SmartScreen may show an
+> "unknown publisher" warning, and macOS Gatekeeper will require manual
+> approval. Code signing is on the roadmap — see
+> [`project_update.md`](./project_update.md).
 
 ---
 
 ## 🚀 Key Features
 
-* **Intelligent 16-Thread HTTP Range Accelerator:**
-  * Configurable parallel Range streams (1, 2, 4, 8, 16, or Auto).
-  * Dynamic work-stealing with midpoint division: faster threads steal uncompleted byte ranges from lagging workers.
-  * Non-truncating `r+` byte-level resumption after network interruptions or system reboots.
-* **Smart Destination & Category Routing:**
-  * Interactive destination folder prompt before download starts.
-  * Automatic extension categorization: Videos, Audio, Documents, Compressed, Programs, Images.
-* **Genesis UI Desktop Workstation:**
-  * Full sidebar navigation: *Dashboard, All Downloads, Active, Queued, Completed, History, Analytics, Settings*.
-  * Real-time 16-segment thread telemetry with visual status heatmaps.
-  * Detailed transfer drawer with cryptographic SHA-256 checksum verification.
-  * Bandwidth Throttle Limiter (Global, per-task, or unlimited).
-* **Embedded SQLite Database:**
-  * High-performance SQLite engine with Write-Ahead Logging (`node:sqlite`).
-  * Instant state persistence across restarts for all tasks, categories, and settings.
-* **Browser Extension (Chromium MV3):**
-  * Local loopback WebSocket bridge (`ws://127.0.0.1:48123`) with origin validation.
-  * Floating media download chip and context menu integration.
+* **Parallel HTTP Range accelerator**
+  * Configurable parallel streams (1, 2, 4, 8, or 16)
+  * Dynamic work stealing with midpoint division — faster workers steal byte
+    ranges from lagging ones
+  * Non-truncating `r+` byte-level resumption with ETag/Last-Modified validation
+  * Retry with exponential backoff and server `429` back-off handling
+* **Smart destination & category routing**
+  * Interactive destination folder prompt (IDM-style) before download starts
+  * Automatic extension categorization: Videos, Music, Documents, Compressed,
+    Programs, Images, Other
+* **Genesis UI desktop workstation** (React 18 + Tailwind)
+  * Dashboard, active queue, history, analytics, scheduled tasks, settings
+  * Per-segment progress telemetry with visual heatmaps
+  * SHA-256 integrity verification on every completed file
+  * Global and per-task bandwidth throttling (token bucket)
+* **Embedded SQLite database** — WAL journaling, instant state persistence
+  across restarts
+* **Browser extension (Chromium MV3 + Firefox)**
+  * Loopback WebSocket bridge (`ws://127.0.0.1:48123`) with origin validation
+  * Floating media download chip and context menu integration
+  * Native messaging fallback host
+* **Media pipeline** — YouTube video/audio extraction and HLS (`.m3u8`) /
+  DASH (`.mpd`) stream downloading & muxing (requires FFmpeg, see below)
 
 ---
 
-## 📁 Repository Folder Structure
+## 🛠️ Running from Source
+
+### Prerequisites
+
+| Requirement | Version | Notes |
+|---|---|---|
+| **Node.js** | **≥ 22.5** (24 LTS recommended) | Required for the built-in `node:sqlite` module |
+| **npm** | ≥ 10 | |
+| **FFmpeg** | any recent build | *Optional* — only needed for YouTube / HLS / DASH downloads. Must be on `PATH` (on Windows, the winget `Gyan.FFmpeg` install location is also detected) |
+| **Git LFS** | any | Only if you want the release binaries via `git lfs pull` |
+
+### Quick start (two terminals)
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Terminal A — start the Vite dev server (UI hot reload)
+npm run dev
+
+# 3. Terminal B — launch the Electron shell
+npm start
+```
+
+> The Electron window loads the Vite dev server (`localhost:1420`) when it is
+> running, and falls back to a production build in `dist/` otherwise.
+
+### Production run (no dev server)
+
+```bash
+npm run build   # TypeScript check + Vite production build
+npm start       # Electron loads dist/index.html
+```
+
+### Run the test suite
+
+```bash
+npm test
+```
+
+Runs the engine, cross-platform, file-type, and location-prompt suites on your
+machine. The same suite runs on Ubuntu, Windows, and macOS in CI.
+
+### Package installers
+
+```bash
+npm run package:win     # Windows NSIS installer  → release/
+npm run package:mac     # macOS .dmg (x64 + arm64)
+npm run package:linux   # Linux AppImage + .deb + .rpm
+```
+
+---
+
+## 🧩 Browser Extension Setup
+
+1. Launch TurboGrab (`npm start` or an installed build).
+2. Open **Integration Hub** in the app sidebar, or manually:
+3. In Chrome/Edge/Brave/Opera: go to `chrome://extensions`, enable
+   **Developer mode**, click **Load unpacked**, select the `extension/` folder.
+4. In Firefox: go to `about:debugging#/runtime/this-firefox` → **Load Temporary
+   Add-on** → pick `extension/firefox-manifest.json`'s folder.
+5. Confirm the TurboGrab chip turns green (bridge connected on `127.0.0.1:48123`).
+
+---
+
+## 📁 Repository Structure
 
 ```text
 TurboGrab/
-│
-├── Downloads/                               # Git LFS Release Binaries & Extension
-│   ├── TurboGrab Setup 1.0.0.exe            # Windows Installer (125.88 MB via Git LFS)
-│   ├── TurboGrab-Browser-Extension-v1.0.0.zip # Standalone Browser Extension (21 KB)
-│   ├── extension/                           # Ready-to-load Unpacked Extension Folder
-│   ├── TurboGrab-v1.0.0-Windows-x64.zip     # Portable Multiplatform Archive
-│   └── README.md                            # Download instructions & SHA-256 hashes
-│
-├── assets/screenshots/                      # High-Resolution UI Previews
-│
-├── Additional-Files/                        # Launch & Automation Helpers
-│   ├── TurboGrab.bat                        # One-click desktop launcher
-│   ├── Start-TurboGrab-With-Chrome.bat      # Simultaneous app & browser launcher
-│   └── install-chrome-integration.bat       # Native messaging registry installer
-│
-├── src/                                     # React 18 Frontend
-│   ├── components/                          # Genesis UI components & modals
-│   ├── services/api.ts                      # IPC client bridge
-│   └── types.ts                             # TypeScript domain models
-│
-├── electron/                                # Electron Backend & Engine
-│   ├── main.cjs                             # Main process entry point
-│   ├── preload.cjs                          # Secure ContextBridge IPC
-│   └── engine/                              # DownloadManager, SQLite DB, WebSocket
-│
-├── extension/                               # Google Chrome Extension (MV3)
-├── src-tauri/                               # Tauri & Rust integration source
-├── public/                                  # Static icons and assets
-├── tests/                                   # Automated test suites
-├── .gitattributes                           # Git LFS & line ending rules
-├── .gitignore                               # Production repository exclusions
-├── CONTRIBUTING.md                          # Developer setup & PR guide
-├── LICENSE                                  # MIT Open Source License
-└── README.md                                # Project documentation
+├── electron/                 # Electron main process & download engine
+│   ├── main.cjs              # App entry, IPC handlers, window lifecycle
+│   ├── preload.cjs           # Sandboxed ContextBridge IPC surface
+│   └── engine/               # downloadManager, SQLite, WS bridge, demuxer,
+│                             # browser detection
+├── src/                      # React 18 frontend (TypeScript + Tailwind)
+│   ├── components/           # Genesis UI views & modals
+│   ├── services/api.ts       # IPC client bridge (Electron + browser fallback)
+│   └── types.ts              # Domain models
+├── extension/                # Browser extension (Chromium MV3 + Firefox)
+├── src-tauri/                # Experimental Rust/Tauri engine (not shipped)
+├── scripts/                  # Per-platform packaging scripts
+├── tests/                    # Engine, cross-platform & integration suites
+├── Documentation/            # Architecture, API, security & install guides
+├── Downloads/                # Git LFS release binaries mirror
+├── assets/                   # Screenshots
+└── public/                   # Static assets
 ```
 
 ---
 
-## 🛠️ Instructions for Running from Source
+## 🔒 Security & Privacy
 
-If you prefer building and running TurboGrab from source:
+TurboGrab is designed security-first:
 
-### Prerequisites
-* **Node.js**: v20 or higher
-* **npm**: v9 or higher
+* Renderer runs fully sandboxed (`contextIsolation: true`, `nodeIntegration: false`,
+  `sandbox: true`) with a minimal, explicit IPC surface
+* The loopback bridge binds to `127.0.0.1` only and validates browser extension
+  origins before accepting commands
+* All filenames are sanitized against path traversal
+* Downloaded executables are never auto-executed
+* Zero telemetry — history and settings live in `~/.turbograb/turbograb.db`
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+Please report vulnerabilities privately — see
+[SECURITY.md](.github/SECURITY.md). Technical details of the current
+safeguards: [Documentation/SECURITY.md](Documentation/SECURITY.md).
 
-### 2. Run Desktop App in Development
-```bash
-npm start
-```
-Or double-click `TurboGrab.bat` on Windows.
+---
 
-### 3. Load Chrome Browser Extension
-1. Open Google Chrome and go to `chrome://extensions/`.
-2. Enable **Developer mode** (top-right toggle).
-3. Click **Load unpacked** and select the `extension/` directory.
+## 🗺️ Roadmap
+
+See [`project_update.md`](./project_update.md) for the full engineering plan:
+
+- [ ] Publish macOS `.dmg` and Linux AppImage to GitHub Releases
+- [ ] Code signing & macOS notarization
+- [ ] In-app auto-update via `electron-updater`
+- [ ] Bundle FFmpeg per-platform (no PATH dependency)
+- [ ] Publish the extension to the Chrome Web Store & AMO, pin extension IDs
+- [ ] Electron fuses & asar integrity validation
+- [ ] Retire the experimental `src-tauri` engine
 
 ---
 
 ## 🤝 Contributing
-Contributions are warmly welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on developer setup, branch naming, and pull request guidelines.
 
----
+Contributions are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) for the dev
+setup, branch naming, and PR guidelines, and please follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+## 🐛 Issues & Support
+
+Found a bug or have a feature request? Please open an issue with the matching
+template in the
+[Issues tab](https://github.com/Aryan-lakhotia99/TurboGrab/issues).
 
 ## 📜 License
-Distributed under the **[MIT License](LICENSE)**. Built for speed, security, and privacy.
+
+Distributed under the [MIT License](LICENSE).

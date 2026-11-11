@@ -129,7 +129,11 @@ async function runTests() {
   console.log('====================================================\n');
 }
 
-runTests().catch((err) => {
+runTests().then(() => {
+  downloadManager.dispose();
+  process.exit(0);
+}).catch((err) => {
   console.error('\n❌ Test Failure:', err);
+  downloadManager.dispose();
   process.exit(1);
 });
