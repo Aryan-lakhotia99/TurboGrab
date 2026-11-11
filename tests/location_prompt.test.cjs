@@ -102,7 +102,11 @@ async function runTests() {
   console.log('🎉 All download location & IDM-style prompt tests passed successfully!');
 }
 
-runTests().catch(err => {
+runTests().then(() => {
+  downloadManager.dispose();
+  process.exit(0);
+}).catch(err => {
   console.error('❌ Test failed:', err);
+  downloadManager.dispose();
   process.exit(1);
 });

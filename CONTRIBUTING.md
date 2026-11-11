@@ -7,9 +7,10 @@ Thank you for your interest in contributing to **TurboGrab**! We welcome bug rep
 ## 🛠️ Development Setup
 
 ### Prerequisites
-* **Node.js**: v20+ (Node.js 24 recommended for native `node:sqlite`)
+* **Node.js**: v22.5+ (**v24 LTS recommended**) — the engine uses the built-in `node:sqlite` module, which is unavailable in Node 20/21. A `.nvmrc` is provided (`nvm use`).
 * **npm**: v10+
-* **Git** & **Git LFS**: Installed and initialized
+* **Git LFS**: Only needed if you want the release binaries locally (`git lfs pull`)
+* **FFmpeg** (optional): required only for YouTube / HLS / DASH downloads. Any recent build on your `PATH` works.
 
 ### Getting Started
 
@@ -24,21 +25,24 @@ Thank you for your interest in contributing to **TurboGrab**! We welcome bug rep
    npm install
    ```
 
-3. **Launch the Development Workstation:**
+3. **Launch the Development Workstation (two terminals):**
    ```bash
-   # Starts Vite development server and launches Electron
+   # Terminal A — Vite dev server (UI hot reload)
+   npm run dev
+
+   # Terminal B — Electron shell
    npm start
    ```
+   > The Electron window loads the Vite dev server while it is running, or a
+   > production `dist/` build if one exists. For a single-command production
+   > run use `npm run build && npm start`.
 
-4. **Build the Production Frontend:**
-   ```bash
-   npm run build
-   ```
-
-5. **Run the Test Suite:**
+4. **Run the Test Suite:**
    ```bash
    npm test
    ```
+   All four suites (engine, cross-platform, file types, location prompt) must
+   pass. CI runs them on Ubuntu, Windows, and macOS for every PR.
 
 ---
 
@@ -63,7 +67,9 @@ Thank you for your interest in contributing to **TurboGrab**! We welcome bug rep
    * `feat: add new download schedule queue`
    * `fix: handle edge case in range stream chunk stitching`
    * `docs: update IPC channel specification`
-4. **Testing**: Ensure that all automated tests pass (`npm test`) before opening a PR.
+4. **Testing**: Ensure that all automated tests pass (`npm test`) before opening a PR. CI must be green on all three platforms (Ubuntu, Windows, macOS).
+5. **Code of Conduct**: By participating in this project you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+6. **Security**: Never fix security vulnerabilities in a public PR — report them privately per [SECURITY.md](.github/SECURITY.md).
 
 ---
 

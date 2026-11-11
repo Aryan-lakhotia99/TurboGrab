@@ -1169,7 +1169,7 @@ class DownloadManager {
   }
 
   initSchedulerLoop() {
-    setInterval(() => {
+    this.schedulerInterval = setInterval(() => {
       try {
         const tasks = db.getScheduledTasks();
         const now = Date.now();
@@ -1197,6 +1197,15 @@ class DownloadManager {
         }
       } catch (_) {}
     }, 3000);
+  }
+
+  // Stop background timers (scheduler + autosave). Required for clean shutdown
+  // in tests and prevents the Node process from hanging after script completion.
+  dispose() {
+    if (this.schedulerInterval) clearInterval(this.schedulerInterval);
+    if (this.autoSaveInterval) clearInterval(this.autoSaveInterval);
+    this.schedulerInterval = null;
+    this.autoSaveInterval = null;
   }
 }
 

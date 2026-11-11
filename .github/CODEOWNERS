@@ -1,0 +1,8 @@
+# Default owner for everything until the team grows
+* @Aryan-lakhotia99
+
+# Security-sensitive areas — require maintainer review
+/.github/            @Aryan-lakhotia99
+/electron/           @Aryan-lakhotia99
+/extension/          @Aryan-lakhotia99
+/scripts/            @Aryan-lakhotia99

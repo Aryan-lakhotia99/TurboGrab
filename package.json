@@ -1,9 +1,32 @@
 {
   "name": "turbograb",
-  "private": true,
   "version": "1.0.0",
+  "description": "TurboGrab — open-source, privacy-first download accelerator with a 16-connection parallel HTTP Range engine, Electron desktop workstation, and Chromium/Firefox browser extension.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aryan-lakhotia99/TurboGrab.git"
+  },
+  "homepage": "https://github.com/Aryan-lakhotia99/TurboGrab#readme",
+  "bugs": {
+    "url": "https://github.com/Aryan-lakhotia99/TurboGrab/issues"
+  },
+  "keywords": [
+    "download-manager",
+    "download-accelerator",
+    "electron",
+    "react",
+    "typescript",
+    "browser-extension",
+    "mv3",
+    "http-range",
+    "idm-alternative"
+  ],
   "type": "module",
   "main": "electron/main.cjs",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "start": "electron electron/main.cjs",
     "app": "electron electron/main.cjs",
@@ -11,6 +34,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "test": "node tests/engine.test.cjs && node tests/cross_platform.test.cjs && node tests/file_types.test.cjs && node tests/location_prompt.test.cjs",
     "package:win": "npm run build && electron-builder --win",
     "package:mac": "npm run build && electron-builder --mac",
     "package:linux": "npm run build && electron-builder --linux",
@@ -37,7 +61,9 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -53,20 +79,25 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
       "category": "public.app-category.utilities"
     },
     "linux": {
-      "target": ["AppImage", "deb", "rpm"],
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
       "category": "Network;Utility;"
     }
   },
   "dependencies": {
     "@distube/ytdl-core": "^5.2.0",
-    "@tauri-apps/api": "^2.0.0",
-    "@tauri-apps/plugin-shell": "^2.0.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
@@ -79,13 +110,13 @@
     "@types/chrome": "^0.3.7",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^6.3.0",
     "autoprefixer": "^10.4.20",
     "electron": "^45.2.1",
     "electron-builder": "^26.18.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
-    "vite": "^5.4.11"
+    "vite": "^8.3.8"
   }
 }
